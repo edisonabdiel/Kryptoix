@@ -10,8 +10,10 @@ const { ethereum } = window;
 const createEthereumContract = () => {
   const provider = new ethers.providers.Web3Provider(ethereum);
   const signer = provider.getSigner();
-  const transactionsContract = new ethers.Contract(contractAddress, contractABI, signer);
 
+  const transactionsContract = new ethers.Contract(contractAddress, contractABI, signer);
+  
+  
   return transactionsContract;
 };
 
@@ -21,11 +23,12 @@ export const TransactionsProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [transactionCount, setTransactionCount] = useState(localStorage.getItem("transactionCount"));
   const [transactions, setTransactions] = useState([]);
-
+  
   const handleChange = (e, name) => {
     setformData((prevState) => ({ ...prevState, [name]: e.target.value }));
   };
-
+  
+  
   const getAllTransactions = async () => {
     try {
       if (ethereum) {
